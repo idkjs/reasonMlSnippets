@@ -6,13 +6,13 @@
 - `npm run webpack` for starting webpack-file-watcher  to bundle buckescript-compiled-js-files: `lib/*.js -> build/index.js`
 
 ## (2) Bucklescript + Parcel
-- `bsb -init <project-folder-name> -theme basic-reason` 
+- `bsb -init <project-folder-name> -theme basic-reason`
 - Will create a project-folder with bucklescript (bsconfig.json)
 - `npm i -S reason-react react react-dom`
 - Add `"reason": {"react-jsx": 2}` and `"bs-dependencies": ["reason-react"]` to your bsconfig.json
 - `npm i -D parcel-bundler` https://parceljs.org/getting_started.html
 - Create entrypoint-file for parcel-bundler `index.re` with:
-`ReactDOMRe.renderToElementWithId(<div>(ReasonReact.stringToElement("message"))</div>, "root");`
+`ReactDOMRe.renderToElementWithId(<div>(React.string("message"))</div>, "root");`
 - Create `index.html`-file in project-root or wherever with rendertarget for react: `<div id="root"></div>` and link to js-entrypoint-file (!not the bundle-file created by parcel): `<script src="src/index.bs.js"></script>`
 - Add npm-script to package.json for parcel-bundler: `"parcel": "parcel index.html"`
 - `npm run start` for starting bucklescript-file-watcher

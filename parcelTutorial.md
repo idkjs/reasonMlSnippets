@@ -3,7 +3,7 @@
 - https://parceljs.org/getting_started.html
 
 # Manually setting up Parcel with ReasonML and React:
-1. Add dependencies: 
+1. Add dependencies:
 
 - `npm i -S reason-react` for using react/jsx in reason
 - `npm i -D parcel-bundler` for parcel
@@ -15,7 +15,7 @@
 
 3. Hook up Reason for DOM-rendering:
 - Define Reason-entrypoint in `./src/index.re`:
-`ReactDOMRe.renderToElementWithId(<div>(ReasonReact.stringToElement("Hello Reason and Parcel"))</div>, "root");`
+`ReactDOMRe.renderToElementWithId(<div>(React.string("Hello Reason and Parcel"))</div>, "root");`
 - Link the compiled entrypoint index.js into index.html in (private) lib-folder: `<script src="js/src/index.bs.js"></script>`
 
 4. Add .babelrc-file to project-root-folder for babel used by parcel:

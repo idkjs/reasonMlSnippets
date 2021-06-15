@@ -22,15 +22,15 @@ type nestedJunk = {
   payload: string,
   /* use the type declaration of junkLevel1 before
      it is defined due to "and"-joins */
-  junkLevel1
+  junkLevel1,
 }
 and junkLevel1 = {
   payload: string,
-  junkLevel2
+  junkLevel2,
 }
 and junkLevel2 = {
   payload: string,
-  junkLevel3
+  junkLevel3,
 }
 and junkLevel3 = {payload: string};
 
@@ -42,10 +42,10 @@ let junk: nestedJunk = {
     junkLevel2: {
       payload: "further down the stairs to junkLevel2",
       junkLevel3: {
-        payload: "reached basement on junkLevel3"
-      }
-    }
-  }
+        payload: "reached basement on junkLevel3",
+      },
+    },
+  },
 };
 
 /* Destructuring of object */
@@ -53,8 +53,8 @@ let {
   payload: p0,
   junkLevel1: {
     payload: p1,
-    junkLevel2: {payload: p2, junkLevel3: {payload: p3}}
-  }
+    junkLevel2: {payload: p2, junkLevel3: {payload: p3}},
+  },
 } = junk;
 
 /* Logging destructured values: */
@@ -64,7 +64,7 @@ payload p0: $p0
 payload p1: $p1
 payload p2: $p2
 payload p3: $p3
-    |j}
+    |j},
 );
 
 /* Destructuring of function arguments in the
@@ -73,11 +73,44 @@ payload p3: $p3
    */
 type person = {
   name: string,
-  age: int
+  age: int,
 };
 
-let someFunction = (~person as {name}) => {/* you can use `name` here */};
+let someFunction = (~person as {name}) => {
+  /* you can use `name` here */
+  Js.log
+    // Js.log(person);
+    (name);
+};
 
 let otherFunction = (~person as {name} as thePerson) => {
   /* you can use both `name` and the whole record as `thePerson` here */
+  Js.log(
+    {
+      name;
+    },
+  );
+  Js.log(thePerson);
 };
+let person = {name: "Tina", age: 23};
+otherFunction(person);
+// Tina
+// { name: 'Tina', age: 23 }
+someFunction(person);
+// Tina
+let otherFunction = (~person as {name, age} as thePerson) => {
+  /* you can use both `name` and the whole record as `thePerson` here */
+  Js.log(
+    {
+      name;
+    },
+  );
+  Js.log(
+    {
+      age;
+    },
+  );
+  Js.log(thePerson);
+};
+let person = {name: "Tina", age: 23};
+otherFunction(person);
